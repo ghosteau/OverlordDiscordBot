@@ -34,7 +34,7 @@ ____________________________________________________________________
 
 3/11/2024 update:
 
-- Added spamcount command
+- Added spamcount command -- used to see how many times a user has been flagged for spam
 - Added MicrosoftSQL database storage for flagged messages using SQLAlchemy, dictionaries, and pandas dataframes
 - Updated logs with user ID to help sniff out cases of username changing
 - Fixed an issue with log channel detection, now looks for "server_logs", "discord_logs", "mod_logs", or  "logs" all as viable log channel names

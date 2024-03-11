@@ -25,4 +25,7 @@ ____________________________________________________________________
   Type %help command for more info on a command.
 ____________________________________________________________________
 
-As mentioned earlier, this bot was fed data from a pretty commmon data set called the spam detection data set. From that, me and my friends added extra data to tune the bot's detection capabilities to our needs, so you will need to do that part yourself.
+As mentioned earlier, this bot was fed data from a pretty common data set called the spam detection data set. From that, me and my friends added extra data to tune the bot's detection capabilities to our needs, so you will need to do that part yourself.
+
+
+For future updates, I would expect something along the lines of more SQL compatibility to send flagged messages to a server -- thus users who get false flagged can report it a little easier. But it would have to be transparent to the users beforehand that their message data may be used to help train the model.

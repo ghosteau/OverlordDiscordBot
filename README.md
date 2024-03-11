@@ -29,3 +29,12 @@ As mentioned earlier, this bot was fed data from a pretty common data set called
 
 
 For future updates, I would expect something along the lines of more SQL compatibility to send flagged messages to a server -- thus users who get false flagged can report it a little easier. But it would have to be transparent to the users beforehand that their message data may be used to help train the model.
+
+____________________________________________________________________
+
+3/11/2024 update:
+
+- Added spamcount command
+- Added MicrosoftSQL database storage for flagged messages using SQLAlchemy, dictionaries, and pandas dataframes
+- Updated logs with user ID to help sniff out cases of username changing
+- Fixed an issue with log channel detection, now looks for "server_logs", "discord_logs", "mod_logs", or  "logs" all as viable log channel names

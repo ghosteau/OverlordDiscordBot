@@ -1,11 +1,19 @@
 import discord
 from discord.ext import commands
 import SpamRecognizerModel
+import pandas as pd
+
+
+from sqlalchemy import create_engine
+connection_string = f"mssql+pyodbc://localhost/OverlordBot?driver=ODBC+Driver+17+for+SQL+Server&trusted_connection=yes"
+engine = create_engine(connection_string, echo = True)
 
 # This does not use real message data from Discord users -- rather emulated responses for ethical reasons
 
+spam_counts = {}
+
 def run_discord_bot():
-    TOKEN = "put your token here"  # This is to be kept SECRET!!!
+    TOKEN = "YOUR TOKEN HERE"  # This is to be kept SECRET!!!
     intents = discord.Intents.default()
     intents.message_content = True
     intents.presences = True
@@ -26,39 +34,70 @@ def run_discord_bot():
         username = str(message.author)
         user_message = str(message.content)
         channel = str(message.channel)
+        user_id = int(message.author.id)
+        channel_id = int(message.channel.id)
+        message_time = str(message.created_at.strftime('%Y-%m-%d %H:%M:%S UTC'))
 
         nonlocal spam_count  # Use the global variable
         spam_flag = SpamRecognizerModel.model_prediction(user_message)
         if spam_flag and not message.author.guild_permissions.administrator:
             spam_count += 1
+            spam_counts[username] = spam_counts.get(username, 0) + 1
             print("Spam detected -- console log")
             await message.delete()
 
-            log_message = f"Spam detected in *#{channel}* by {message.author.mention}: `{user_message}` -- {message.created_at.strftime('%Y-%m-%d %H:%M:%S UTC')}"
-            log_channel = discord.utils.get(message.guild.channels, name = "server_logs")
+            message_dict = {"Username": [username],
+                            "Message": [user_message],
+                            "Channel": [channel],
+                            "User ID": [user_id],
+                            "Channel ID": [channel_id],
+                            "Message Time": [message_time]}
+
+            message_data = pd.DataFrame.from_dict(message_dict)
+
+            message_data.to_sql("Flagged_Messages", con = engine, if_exists = "append", index = False)
+
+
+            log_message = f"Spam detected in *#{channel}* by {message.author.mention} (**USER ID**: {user_id}):  `{user_message}` -- {message.created_at.strftime('%Y-%m-%d %H:%M:%S UTC')}"
+            log_channel_names = ["server_logs", "discord_logs", "mod_logs", "logs"]
+
+            for channel_name in log_channel_names:
+                log_channel = discord.utils.get(message.guild.channels, name=channel_name)
+                if log_channel:
+                    break
 
             if log_channel:
                 await log_channel.send(log_message)
             else:
                 guild = message.guild
                 overwrites = {
-                    guild.default_role: discord.PermissionOverwrite(read_messages = False),
-                    guild.me: discord.PermissionOverwrite(read_messages = True)
+                    guild.default_role: discord.PermissionOverwrite(read_messages=False),
+                    guild.me: discord.PermissionOverwrite(read_messages=True)
                 }
                 log_channel = await guild.create_text_channel("server_logs", overwrites=overwrites)
                 await log_channel.send("Log channel created.")
+                await log_channel.send(log_message)
 
             await message.channel.send(
                 "My algorithm has detected spam and deleted the message, for questions contact my developer  `@Ghosteau`."
             )
 
-        await bot.process_commands(message)  # This line should be inside on_message event
+        await bot.process_commands(message)
 
     @bot.command(name = "info", help = "Credits and information about Overlord")
     async def info(ctx):
         await ctx.send(
-            "Developed by  `@Ghosteau`  -->  **GitHub**: https://github.com/ghosteau  ||  This bot is a personal security helper that utilizes machine learning solutions to detect spam, while also using commands to moderate"
+            "Developed by  `@Ghosteau`  -->  **GitHub**: https://github.com/ghosteau  ||  This bot is a personal security helper that utilizes machine learning solutions to detect spam, while also using commands to moderate discord servers."
         )
+
+    @bot.command(name = "spamcount", help = "Check how many spam messages a user has sent")
+    async def spam_count_command(ctx, user: discord.Member):
+        if ctx.author.guild_permissions.administrator:
+            user_username = str(user)
+            count = spam_counts.get(user_username, 0)
+            await ctx.send(f"{user.display_name} has sent {count} spam message(s).")
+        else:
+            await ctx.send("You don't have the necessary permissions to use this command.")
 
     @bot.command(name = "killcount", help = "Check how many spam messages I have terminated")
     async def kill_count(ctx):

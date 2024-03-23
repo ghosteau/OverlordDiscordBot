@@ -39,7 +39,7 @@ ____________________________________________________________________
 - Updated logs with user ID to help sniff out cases of username changing
 - Fixed an issue with log channel detection, now looks for "server_logs", "discord_logs", "mod_logs", or  "logs" all as viable log channel names
 
-____________________________________________________________________\
+____________________________________________________________________
 
 3/23/2024 quick addition
 

@@ -31,14 +31,20 @@ def run_discord_bot():
         if message.author == bot.user:
             return
 
+    @bot.event
+    async def on_message(message):
+        if message.author == bot.user:
+            return
+
         username = str(message.author)
         user_message = str(message.content)
         channel = str(message.channel)
         user_id = int(message.author.id)
         channel_id = int(message.channel.id)
         message_time = str(message.created_at.strftime('%Y-%m-%d %H:%M:%S UTC'))
+        message_id = str(message.id)
 
-        nonlocal spam_count  # Use the global variable
+        nonlocal spam_count
         spam_flag = SpamRecognizerModel.model_prediction(user_message)
         if spam_flag and not message.author.guild_permissions.administrator:
             spam_count += 1
@@ -51,7 +57,8 @@ def run_discord_bot():
                             "Channel": [channel],
                             "User ID": [user_id],
                             "Channel ID": [channel_id],
-                            "Message Time": [message_time]}
+                            "Message Time": [message_time],
+                            "Message ID": [message_id]}
 
             message_data = pd.DataFrame.from_dict(message_dict)
 

@@ -36,7 +36,7 @@ ____________________________________________________________________
 
 3/23/2024 quick update:
 
-- Added message ID to the SQL database information sent to have a true primary incrimentive key
+- Added message ID to the SQL database support to create a true primary incrimentive key
 _____________________________________________________________________
 
 7/25/24 big update:

@@ -1,5 +1,6 @@
 # Overlord Discord Bot -- Official Codebase
-*Quick note: due to some file sizes, particularly with the transformer models, the pre-saved models could not be uploaded and are missing from this codebase. I apologize.
+*Quick note: due to some file sizes, particularly with the transformer models, the pre-saved models could not be uploaded and are missing from this codebase. I apologize.*
+*Once I upload the model on Hugging Face, I will link it here!*
 
 BOT COMMANDS:
 ____________________________________________________________________

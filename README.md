@@ -1,5 +1,5 @@
 # Overlord Discord Bot -- Official Codebase
-*Quick note: due to some file sizes, particularly with the transformer models, the Overlord-T model could not be uploaded on GitHub.*
+*Quick note: due to some file sizes, particularly with the transformer models, the Overlord-T pre-save could not be uploaded on GitHub. You can use the Hugging Face link below.*
 
 **Hugging Face link for Overlord-T Model**: https://huggingface.co/ghosteau/OverlordT/tree/main
 

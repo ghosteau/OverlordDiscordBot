@@ -49,5 +49,6 @@ _____________________________________________________________________
 - An official terms of use has been added, which you can read now doing /terms.
 - The codebase is now much more organized. This will not effect the average user but it is going to be something that will benefit developers and myself going forward.
 - There is now a slash command to toggle SQL support (for your personal SQL servers to track spam logging). Be careful with this functionality and act in accordance with Discord policy and the Overlord terms of use.
+- Added a Hugging Face link for the transformer model, Overlord-T, due to file size issues.
 _____________________________________________________________________
 

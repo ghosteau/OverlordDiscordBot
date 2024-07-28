@@ -13,7 +13,7 @@ spam_counts = {}
 
 def run_discord_bot():
     """
-    I highly suggest you use an env variable for storing the bot token, as it is generally safer
+    I highly suggest you use an env variable for storing the bot token and connection string (for SQL support only), as it is generally safer
     If you suspect somebody has taken your token, report it and change it immediately
     """
     TOKEN = None

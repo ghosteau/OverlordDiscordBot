@@ -3,7 +3,6 @@
 
 **Hugging Face link for Overlord-T Model**: https://huggingface.co/ghosteau/OverlordT/tree/main
 
-BOT COMMANDS:
 ____________________________________________________________________
 
 **Here is a list of commands and information.**

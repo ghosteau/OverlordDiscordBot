@@ -51,3 +51,6 @@ _____________________________________________________________________
 - Added a Hugging Face link for the transformer model, Overlord-T, due to file size issues.
 _____________________________________________________________________
 
+8/5/2024 TOS update:
+- Made data collection with SQL support more clear, if it wasn't before. I will stress it here as well -- if you toggle SQL support and link Overlord to your own database, you MUST act in accordance with Discord policy and local data protection laws. This feature was implimented for the sole purpose of helping people train models and experiment locally with people who have given consent to have data collected, such as friends who want to help train AI spam-flag models via Discord.
+

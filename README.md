@@ -1,56 +1,57 @@
 # Overlord Discord Bot -- Official Codebase
-*Quick note: due to some file sizes, particularly with the transformer models, the Overlord-T pre-save could not be uploaded on GitHub. You can use the Hugging Face link below to access the Overlord-T model directly instead.*
 
-**Hugging Face link for Overlord-T Model**: https://huggingface.co/ghosteau/OverlordT/tree/main
+> **Note**: Due to file size limitations, the Overlord-T pre-trained model could not be uploaded to GitHub. You can access it directly via Hugging Face using the link below:
 
-____________________________________________________________________
+[**Hugging Face link for Overlord-T Model**](https://huggingface.co/ghosteau/OverlordT/tree/main)
 
-**Here is a list of commands and information.**
-            
-            ```helpme``` shows a list of commands and information
-            ```info``` gives general info and credits for Overlord
-            ```terms``` shows the official Overlord terms of use
-            ```chatmute``` (arguments: user) mutes a user in all text channels
-            ```chatunmute``` (arguments: user) unmutes a user in all texts channels
-            ```voicemuteall``` mutes all users in a voice channel (excluding admins)
-            ```voiceunmuteall``` unmutes all users in a voice channel
-            ```voicemute``` (arguments: user) mutes a user in a voice channel
-            ```voiceunmute``` (arguments: user) unmutes a user in a voice channel
-            ```warn``` (arguments: user, reason) pings and warns a user; general warn command
-            ```killcount``` shows how many messages have been terminated by Overlord
-            ```spamcount``` (arguments: user) shows total terminated messages for specific user
-            ```sqlsupport``` a command to toggle SQL support for spam message registry
-            ```modelselection``` (arguments: modelnumber) a command to disable or toggle AI detection; input 0 to disable, 1 to use LOG1, and 2 to use T
-            
-____________________________________________________________________
-*UPDATE LOG*
+---
 
-3/11/2024 update:
+## Commands and Features
+Below is a list of commands supported by Overlord:
 
-- Added spamcount command -- used to see how many times a user has been flagged for spam.
-- Added MicrosoftSQL database storage for flagged messages using SQLAlchemy, dictionaries, and pandas dataframes.
-- Updated logs with user ID to help sniff out cases of username changing.
-- Fixed an issue with log channel detection, now looks for "server_logs", "discord_logs", "mod_logs", or  "logs" all as viable log channel names.
+- `helpme`: Displays a comprehensive list of commands and their descriptions.
+- `info`: Provides general information and credits for Overlord.
+- `terms`: Displays Overlord's official terms of use.
+- `chatmute <user>`: Mutes a user in all text channels.
+- `chatunmute <user>`: Unmutes a user in all text channels.
+- `voicemuteall`: Mutes all users in a voice channel (excluding admins).
+- `voiceunmuteall`: Unmutes all users in a voice channel.
+- `voicemute <user>`: Mutes a specific user in a voice channel.
+- `voiceunmute <user>`: Unmutes a specific user in a voice channel.
+- `warn <user> <reason>`: Sends a warning message to a user.
+- `killcount`: Displays the total number of messages terminated by Overlord.
+- `spamcount <user>`: Shows the total number of terminated messages for a specific user.
+- `sqlsupport`: Toggles SQL support for the spam message registry.
+- `modelselection <modelnumber>`: Toggles AI detection modes:
+  - `0`: Disable AI detection.
+  - `1`: Use Overlord-LOG1 (legacy model).
+  - `2`: Use Overlord-T (state-of-the-art model).
 
-____________________________________________________________________
+---
 
-3/23/2024 quick update:
+## Update Log
 
-- Added message ID to the SQL database support to create a true primary incrimentive key.
-_____________________________________________________________________
+### **3/11/2024 Update**
+- **New Feature**: Added the `spamcount` command to track the number of times a user has been flagged for spam.
+- **Database Integration**: Introduced Microsoft SQL database storage for flagged messages using SQLAlchemy, dictionaries, and pandas DataFrames.
+- **Enhanced Logging**: User ID added to logs to track cases of username changes.
+- **Bug Fix**: Improved log channel detection to support multiple naming conventions (“server_logs,” “discord_logs,” “mod_logs,” and “logs”).
 
-7/25/24 big update:
+### **3/23/2024 Quick Update**
+- **Database Improvement**: Added message IDs to the SQL database as a primary incremental key.
 
-- Complete support for slash commands now; % prefix support is now deprecated.
-- Overlord now has 3 modes for AI detection (via slash command): a toggle off mode, Overlord-LOG1 (old model which still works perfectly fine), and Overlord-T. The T model is going to be our state-of-the-art/premium model going forward, with hopes to continuously update it to provide a dynamic and effective solution.
-- Massive update to the help command (now called helpme) to be much more organized and a lot more helpful... as it should be.
-- Going along with the helpme command addition and updates, the logs and the info command are also now more organized and informative.
-- An official terms of use has been added, which you can read now doing /terms.
-- The codebase is now much more organized. This will not effect the average user but it is going to be something that will benefit developers and myself going forward.
-- There is now a slash command to toggle SQL support (for your personal SQL servers to track spam logging). Be careful with this functionality and act in accordance with Discord policy and the Overlord terms of use.
-- Added a Hugging Face link for the transformer model, Overlord-T, due to file size issues.
-_____________________________________________________________________
+### **7/25/2024 Major Update**
+- **Slash Command Support**: Full support for slash commands; deprecated `%` prefix.
+- **AI Detection Modes**: Introduced three modes for AI detection:
+  - **Off Mode**: Disables detection.
+  - **Overlord-LOG1**: Legacy model with reliable performance.
+  - **Overlord-T**: Premium state-of-the-art model designed for continuous updates.
+- **Help Command Overhaul**: Improved `helpme` command to be more user-friendly and comprehensive.
+- **Organized Logs**: Enhanced log organization and usability for developers and users.
+- **Terms of Use**: Added `/terms` slash command to display Overlord’s official terms of use.
+- **Codebase Refactoring**: Optimized codebase structure for easier maintenance and development.
+- **SQL Integration Slash Command**: Added slash command for toggling SQL support, ensuring compliance with Discord policies and Overlord terms of use.
+- **Transformer Model Link**: Added Hugging Face link for Overlord-T due to file size limitations.
 
-8/5/2024 TOS update:
-- Made data collection with SQL support more clear, if it wasn't before. I will stress it here as well -- if you toggle SQL support and link Overlord to your own database, you MUST act in accordance with Discord policy and local data protection laws. This feature was implimented for the sole purpose of helping people train models and experiment locally with people who have given consent to have data collected, such as friends who want to help train AI spam-flag models via Discord.
+---
 
